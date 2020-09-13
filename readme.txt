@@ -1,4 +1,4 @@
 dwproyecto
 ---
-Another web development project.
+Another school web project.
 
