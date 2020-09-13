@@ -11,7 +11,7 @@
 		<form class="login" action="/usuario/login" method="POST">
 			<label><h2>🔐 Inicio de Sesión</h2></label>
 			<input type="hidden" id="ppr" name="ppr" value="#{pprok}">
-			<input required autofocus type="text" id="nombreUsuario" name="nombreUsuario" value="" placeholder="Nombre" oninvalid="this.setCustomValidity('Ingrese su usuario')" oninput="setCustomValidity('')"><br><br>
+			<input required autofocus type="text" id="usuario" name="usuario" value="" placeholder="Usuario" oninvalid="this.setCustomValidity('Ingrese su usuario')" oninput="setCustomValidity('')"><br><br>
 			<input required type="password" id="clave" name="clave" value="" placeholder="Contraseña" oninvalid="this.setCustomValidity('Ingrese su contraseña')" oninput="setCustomValidity('')"><br><br>
 			<input type="submit" value="🔑 Ingresar" style="width:95%;">
 		</form> 

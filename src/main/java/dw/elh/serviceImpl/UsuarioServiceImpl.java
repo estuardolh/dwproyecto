@@ -16,8 +16,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	UsuarioRepository usuarioRepository;
 	
 	@Override
-	public boolean login(String nombre, String pass) {
-		Optional<Usuario> optionalUsuario = usuarioRepository.getUsuarioByNombre(nombre);
+	public boolean login(String nombreUsuario, String pass) {
+		Optional<Usuario> optionalUsuario = usuarioRepository.getUsuarioByUsuario(nombreUsuario);
 		if(optionalUsuario.isPresent()) {
 			Usuario usuario = optionalUsuario.get();
 			if(usuario.getClave().equals(pass)) {
@@ -29,7 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public Optional<Usuario> getUsuario(String nombreUsuario) {
-		Optional<Usuario> usuario = usuarioRepository.getUsuarioByNombre(nombreUsuario);
+		Optional<Usuario> usuario = usuarioRepository.getUsuarioByUsuario(nombreUsuario);
 		return usuario;
 	}
 

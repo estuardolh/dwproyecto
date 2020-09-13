@@ -29,11 +29,19 @@ public class UsuarioController {
 	UsuarioService usuarioServicio;
 
 	@RequestMapping(value="/registra",method = RequestMethod.POST)
-	public String registra(@ModelAttribute("userDto") UsuarioDto usuario
+	public String registra(@ModelAttribute("userDto") UsuarioDto usuarioDto
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
 			, RedirectAttributes redirectAttributes) {
-		usuarioServicio.saveUsuario(new Usuario(usuario));
+
+		String usuario = usuarioDto.getUsuario();
+		String clave = usuarioDto.getClave();
+		String nombre = usuarioDto.getNombre();
+		Usuario newUsuario = new Usuario();
+		newUsuario.setUsuario(usuario);
+		newUsuario.setClave(clave);
+		newUsuario.setNombre(nombre);
+		usuarioServicio.saveUsuario(newUsuario);
 		return "redirect:panel";
 	}
 	
@@ -42,16 +50,16 @@ public class UsuarioController {
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
 			, RedirectAttributes redirectAttributes) {
-		if(!ObjectUtils.isEmpty(usuario.getNombreUsuario())) {
-			Optional<Usuario> optionalUsuario = usuarioServicio.getUsuario(usuario.getNombreUsuario());
-			if(optionalUsuario.isPresent() && usuarioServicio.login(usuario.getNombreUsuario(), usuario.getClave())) {
+		if(!ObjectUtils.isEmpty(usuario.getUsuario())) {
+			Optional<Usuario> optionalUsuario = usuarioServicio.getUsuario(usuario.getUsuario());
+			if(optionalUsuario.isPresent() && usuarioServicio.login(usuario.getUsuario(), usuario.getClave())) {
 				HttpSession sesion = request.getSession();
 				sesion.setAttribute("login", "true");
 				
 				return "redirect:panel";
 			}
 		}
-	   return "inicio";
+	   return "redirect:inicio";
 	}
 	
 	@GetMapping("/panel")
@@ -65,7 +73,7 @@ public class UsuarioController {
 			return "panel";
 		}
 		else
-			return "inicio";
+			return "redirect:inicio";
 	}
 	
 }

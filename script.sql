@@ -12,7 +12,7 @@ create table estilo(id bigint AUTO_INCREMENT
 drop table estilo_subseccion;
 create table estilo_subseccion(id bigint AUTO_INCREMENT
 , estilo_id bigint
-, seccion_nombre varchar(40)
+, nombre varchar(40)
 , CONSTRAINT fk_estilo_id
     FOREIGN KEY (estilo_id) 
     REFERENCES estilo(id)
@@ -59,7 +59,7 @@ create table usuario(id bigint AUTO_INCREMENT
     REFERENCES perfil(id)
 , PRIMARY KEY (ID));
 
-desc perfil;
+desc estilo_subseccion;
 insert into estilo values(1,'verde');
 insert into estilo_subseccion values(1,1,'p');
 insert into estilo_subseccion_detalle values(1,1,'font-color','green');
@@ -67,4 +67,4 @@ insert into menu values(1,'Inicio',null,null);
 insert into perfil values(1,'Admin',1);
 insert into usuario values(1, 'root', 'root', 'root', 1,0);
 
-commit;
+select * from usuario;

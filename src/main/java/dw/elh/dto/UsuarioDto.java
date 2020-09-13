@@ -1,34 +1,25 @@
 package dw.elh.dto;
 
 public class UsuarioDto {
-	private String nombreUsuario;
-	private String nombre;
-	private String apellido;
+	private String usuario;
 	private String clave;
+	private String nombre;
+	private String perfilId;
+	private String intentos;
 	
-	public UsuarioDto(String nombreUsuario, String nombre, String apellido) {
-		this.nombreUsuario = nombreUsuario;
+	public UsuarioDto(String usuario, String clave, String nombre, String perfilId, String intentos) {
+		super();
+		this.usuario = usuario;
+		this.clave = clave;
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.perfilId = perfilId;
+		this.intentos = intentos;
 	}
-	
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	public String getClave() {
 		return clave;
@@ -36,10 +27,22 @@ public class UsuarioDto {
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
-	
-	@Override
-	public String toString() {
-		return "nombreUsuario: "+nombreUsuario+", nombre: "+nombre+", apellido: "+apellido+", clave: "+clave;
-		
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getPerfilId() {
+		return perfilId;
+	}
+	public void setPerfilId(String perfilId) {
+		this.perfilId = perfilId;
+	}
+	public String getIntentos() {
+		return intentos;
+	}
+	public void setIntentos(String intentos) {
+		this.intentos = intentos;
 	}
 }

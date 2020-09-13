@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import dw.elh.dto.UsuarioDto;
 
@@ -15,16 +17,10 @@ public class Usuario {
 	private String usuario;
 	private String clave;
 	private String nombre;
-	
-	public Usuario(UsuarioDto usuarioDto) {
-		this.usuario = usuarioDto.getNombreUsuario();
-		this.nombre = usuarioDto.getNombre();
-		this.clave = usuarioDto.getClave();
-	}
-	
-	public Usuario() {
-		super();
-	}
+	@ManyToOne
+	@JoinColumn(name="perfil_id")
+	private Perfil perfil;
+	private Long intentos;
 	
 	public Long getId() {
 		return id;
@@ -49,5 +45,17 @@ public class Usuario {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public Perfil getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+	public Long getIntentos() {
+		return intentos;
+	}
+	public void setIntentos(Long intentos) {
+		this.intentos = intentos;
 	}
 }
