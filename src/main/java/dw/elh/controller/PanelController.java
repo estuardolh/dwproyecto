@@ -1,0 +1,36 @@
+package dw.elh.controller;
+
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dw.elh.service.UsuarioService;
+
+@Controller
+@RequestMapping(value="/panel")
+public class PanelController {
+	@Autowired
+	UsuarioService usuarioServicio;
+
+	@GetMapping("/")
+	public String panel(ModelMap modelo
+			, HttpServletRequest request
+			, HttpServletRequest httpRequest) throws NoSuchAlgorithmException {
+		HttpSession sesion = request.getSession();
+		if(!ObjectUtils.isEmpty(sesion.getAttribute("login"))
+				&& sesion.getAttribute("login").equals("true")) {
+			modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
+			return "panel";
+		}
+		else
+			return "redirect:inicio";
+	}
+}

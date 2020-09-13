@@ -1,6 +1,5 @@
 package dw.elh.controller;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,31 +47,19 @@ public class UsuarioController {
 	public String login(@ModelAttribute("userDto") UsuarioDto usuario
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
-			, RedirectAttributes redirectAttributes) {
+			, RedirectAttributes redirectAttributes
+			, ModelMap modelo) {
 		if(!ObjectUtils.isEmpty(usuario.getUsuario())) {
 			Optional<Usuario> optionalUsuario = usuarioServicio.getUsuario(usuario.getUsuario());
 			if(optionalUsuario.isPresent() && usuarioServicio.login(usuario.getUsuario(), usuario.getClave())) {
 				HttpSession sesion = request.getSession();
 				sesion.setAttribute("login", "true");
 				
-				return "redirect:panel";
+				return "redirect:/panel/";
 			}
 		}
-	   return "redirect:inicio";
+		
+		return "redirect:/";
 	}
-	
-	@GetMapping("/panel")
-	public String panel(ModelMap modelo
-			, HttpServletRequest request
-			, HttpServletRequest httpRequest) throws NoSuchAlgorithmException {
-		HttpSession sesion = request.getSession();
-		if(!ObjectUtils.isEmpty(sesion.getAttribute("login"))
-				&& sesion.getAttribute("login").equals("true")) {
-			modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
-			return "panel";
-		}
-		else
-			return "redirect:inicio";
-	}
-	
+
 }

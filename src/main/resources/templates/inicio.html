@@ -14,7 +14,8 @@
 			<input required autofocus type="text" id="usuario" name="usuario" value="" placeholder="Usuario" oninvalid="this.setCustomValidity('Ingrese su usuario')" oninput="setCustomValidity('')"><br><br>
 			<input required type="password" id="clave" name="clave" value="" placeholder="Contraseña" oninvalid="this.setCustomValidity('Ingrese su contraseña')" oninput="setCustomValidity('')"><br><br>
 			<input type="submit" value="🔑 Ingresar" style="width:95%;">
-		</form> 
+		</form>
+		<span th:text="${login}"/>
 	</div>
 </body>
 </html>
