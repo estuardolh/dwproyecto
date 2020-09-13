@@ -67,4 +67,4 @@ insert into menu values(1,'Inicio',null,null);
 insert into perfil values(1,'Admin',1);
 insert into usuario values(1, 'root', 'root', 'root', 1,0);
 
-select * from usuario;
+select * from menu;
