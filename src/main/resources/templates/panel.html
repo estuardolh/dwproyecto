@@ -63,20 +63,11 @@ $(document).ready(function() {
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 		<div class="collapse navbar-collapse" id="main_nav">
-			<ul class="navbar-nav">
+			<ul class="navbar-nav" th:each="menu : ${menus}">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Usuario</a>
-				    <ul class="dropdown-menu">
-					  <li><a class="dropdown-item" href="#">Agregar</a></li>
-					  <li><a class="dropdown-item" href="#">Editar</a></li>
-				    </ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Estilo</a>
-				    <ul class="dropdown-menu">
-					  <li><a class="dropdown-item" href="#"></a></li>
-					  <li><a class="dropdown-item" href="#"></a></li>
-					  <li><a class="dropdown-item" href="#"></a></li>
+					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" th:text="${menu.nombre}"></a>
+				    <ul class="dropdown-menu" th:each="smenu : ${menu.subMenus}">
+					  <li><a class="dropdown-item" th:href="${smenu.enlace}" th:text="${smenu.nombre}"></a></li>
 				    </ul>
 				</li>
 			</ul>

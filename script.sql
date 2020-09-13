@@ -30,6 +30,7 @@ create table estilo_subseccion_detalle(id bigint AUTO_INCREMENT
 
 drop table menu;
 create table menu(id bigint AUTO_INCREMENT
+, posicion bigint default 0
 , nombre varchar(40)
 , menu_padre_id bigint
 , archivo_html varchar(80)
@@ -63,8 +64,13 @@ desc estilo_subseccion;
 insert into estilo values(1,'verde');
 insert into estilo_subseccion values(1,1,'p');
 insert into estilo_subseccion_detalle values(1,1,'font-color','green');
-insert into menu values(1,'Inicio',null,null);
+insert into menu values(1,0,'Usuario',null,null);
+insert into menu values(2,0,'Agregar',1,null);
+insert into menu values(3,1,'Listar',1,null);
+insert into menu values(4,1,'Estilo',null,null);
 insert into perfil values(1,'Admin',1);
 insert into usuario values(1, 'root', 'root', 'root', 1,0);
 
 select * from menu;
+select * from perfil;
+select * from usuario;
