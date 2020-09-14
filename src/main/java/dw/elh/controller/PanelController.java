@@ -1,7 +1,6 @@
 package dw.elh.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import dw.elh.dto.MenuDto;
+import dw.elh.service.MenuService;
 import dw.elh.service.UsuarioService;
 
 @Controller
@@ -21,27 +20,30 @@ import dw.elh.service.UsuarioService;
 public class PanelController {
 	@Autowired
 	UsuarioService usuarioServicio;
+	@Autowired
+	MenuService menuService;
 
-	@GetMapping("/")
+	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String panel(ModelMap modelo
 			, HttpServletRequest request
 			, HttpServletRequest httpRequest) throws NoSuchAlgorithmException {
 		HttpSession sesion = request.getSession();
 		if(!ObjectUtils.isEmpty(sesion.getAttribute("login"))
 				&& sesion.getAttribute("login").equals("true")) {
-			MenuDto menuUsuarioAgregar = new MenuDto();
+			
+			/*MenuDto menuUsuarioAgregar = new MenuDto();
 			menuUsuarioAgregar.setNombre("Agregar");
-			menuUsuarioAgregar.setEnlace("/usuario/agregarUsuario");
+			menuUsuarioAgregar.setEnlace("/usuarios/agregar");
 			
 			MenuDto menuUsuarioListar = new MenuDto();
-			menuUsuarioListar.setNombre("Listar");
-			menuUsuarioAgregar.setEnlace("/usuario/listarUsuario");
+			menuUsuarioListar.setNombre("Ver");
+			menuUsuarioListar.setEnlace("/usuarios");
 			
 			MenuDto menuUsuario = new MenuDto();
 			menuUsuario.setNombre("Usuario");
-			menuUsuario.setSubMenus(Arrays.asList(menuUsuarioAgregar, menuUsuarioListar));
+			menuUsuario.setSubMenus(Arrays.asList(menuUsuarioAgregar, menuUsuarioListar));*/
 			
-			modelo.addAttribute("menus", Arrays.asList(menuUsuario));
+			modelo.addAttribute("menus", menuService.getMenu());
 			return "panel";
 		}
 		else

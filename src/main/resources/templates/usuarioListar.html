@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Usuario</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="base.css">
+<head th:replace="comun :: cabecera (titulo='Usuarios')">
 </head>
 <body>
+	<div th:replace="comun :: menu (titulo = '/ Usuarios')">
+	</div>
+	
 	<div style="width:25%">
 	<h2>Lista de usuarios</h2>
 	<table>

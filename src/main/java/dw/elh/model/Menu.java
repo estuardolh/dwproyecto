@@ -19,10 +19,10 @@ public class Menu {
 	private Menu menuPadre;
 	private String archivoHtml;
 
-	Long getId() {
+	public Long getId() {
 		return id;
 	}
-	void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Long getPosicion() {
@@ -31,22 +31,22 @@ public class Menu {
 	public void setPosicion(Long posicion) {
 		this.posicion = posicion;
 	}
-	String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
-	void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	Menu getMenuPadre() {
+	public Menu getMenuPadre() {
 		return menuPadre;
 	}
-	void setMenuPadre(Menu menuPadre) {
+	public void setMenuPadre(Menu menuPadre) {
 		this.menuPadre = menuPadre;
 	}
-	String getArchivoHtml() {
+	public String getArchivoHtml() {
 		return archivoHtml;
 	}
-	void setArchivoHtml(String archivoHtml) {
+	public void setArchivoHtml(String archivoHtml) {
 		this.archivoHtml = archivoHtml;
 	}
 }

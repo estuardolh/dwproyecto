@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
@@ -21,26 +22,39 @@ import dw.elh.model.Usuario;
 import dw.elh.service.UsuarioService;
 
 @Controller
-@RequestMapping(value="/usuario")
+@RequestMapping(value="/usuarios")
 public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioServicio;
 
-	@RequestMapping(value="/registra",method = RequestMethod.POST)
+	@RequestMapping(value="/agregar",method = {RequestMethod.GET, RequestMethod.POST})
 	public String registra(@ModelAttribute("userDto") UsuarioDto usuarioDto
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
 			, RedirectAttributes redirectAttributes) {
-
-		String usuario = usuarioDto.getUsuario();
-		String clave = usuarioDto.getClave();
-		String nombre = usuarioDto.getNombre();
-		Usuario newUsuario = new Usuario();
-		newUsuario.setUsuario(usuario);
-		newUsuario.setClave(clave);
-		newUsuario.setNombre(nombre);
-		usuarioServicio.saveUsuario(newUsuario);
-		return "redirect:panel";
+		if(request.getMethod().equals(HttpMethod.POST.toString())) {
+			String usuario = usuarioDto.getUsuario();
+			String clave = usuarioDto.getClave();
+			String nombre = usuarioDto.getNombre();
+			Usuario newUsuario = new Usuario();
+			newUsuario.setUsuario(usuario);
+			newUsuario.setClave(clave);
+			newUsuario.setNombre(nombre);
+			usuarioServicio.saveUsuario(newUsuario);
+			
+			return "redirect:/usuarios/";
+		}
+		
+		return "usuarioAgregar";
+	}
+	
+	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
+	public String listar(ModelMap modelo
+			, @RequestHeader HttpHeaders httpHeaders
+			, HttpServletRequest request
+			, RedirectAttributes redirectAttributes) {
+		modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
+		return "usuarioListar";
 	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
