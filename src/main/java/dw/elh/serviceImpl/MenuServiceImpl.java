@@ -83,4 +83,9 @@ public class MenuServiceImpl implements MenuService {
 		}
 		return listaMenusDto; 
 	}
+
+	@Override
+	public void delete(Long id) {
+		menuRepository.deleteById(id);
+	}	
 }

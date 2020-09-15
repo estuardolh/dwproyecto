@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,13 @@ public class UsuarioController extends BaseController {
 			}
 		}
 		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String inicio(ModelMap modelo
+			, HttpServletRequest request) {
+		logout(request);		
 		return "redirect:/";
 	}
 }

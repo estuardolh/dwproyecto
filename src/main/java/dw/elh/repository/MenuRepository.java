@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import dw.elh.model.Menu;
 
-public interface MenuRepository extends CrudRepository<Menu, Integer>{
+public interface MenuRepository extends CrudRepository<Menu, Long>{
 	List<Menu> getMenuByMenuPadreIsNullOrderByPosicion();
 	@Query(value = "SELECT * FROM menu m WHERE m.menu_padre_id = ?1", nativeQuery = true)
 	List<Menu> getMenuByMenuPadreId(Long padreId);

@@ -22,4 +22,7 @@ public class BaseController {
 	protected void preparaModel(ModelMap modelo) {
 		modelo.addAttribute("menus", menuService.getMenu());
 	}
+	protected void logout(HttpServletRequest request) {
+		request.getSession(false).invalidate();
+	}
 }

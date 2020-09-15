@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import dw.elh.dto.UsuarioDto;
-
 @Entity
 public class Usuario {
 	@Id

@@ -13,11 +13,18 @@
         <th>Padre</th>
         <th>Nombre</th>
         <th>Enlace</th>
+        <th>Accion</th>
       </tr>
       <tr th:each="menu : ${menuExtendido}">
         <td th:text="${menu.padreNombre}"></td>
         <td th:text="${menu.nombre}"></td>
         <td th:text="${menu.enlace}"></td>
+        <td>
+        	<form method="post" action="/menus/eliminar">
+        		<input type="hidden" id="eliminaId" name="eliminaId" th:value="${menu.id}">
+        		<input type="submit" value="Eliminar">
+        	</form>
+        </td>
       </tr>
     </table>
     </div>

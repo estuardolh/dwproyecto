@@ -26,7 +26,7 @@ public class MenuController extends BaseController {
 	UsuarioService usuarioServicio;
 
 	@RequestMapping(value="/agregar",method = {RequestMethod.GET, RequestMethod.POST})
-	public String registra(@ModelAttribute("menuDtoTecnico") MenuDto menuDto
+	public String registra(@ModelAttribute("menuDto") MenuDto menuDto
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
 			, RedirectAttributes redirectAttributes
@@ -57,6 +57,22 @@ public class MenuController extends BaseController {
 		}
 		
 		return "menuAgregar";
+	}
+	
+	@RequestMapping(value="/eliminar",method = {RequestMethod.POST})
+	public String elimina(@RequestHeader HttpHeaders httpHeaders
+			, HttpServletRequest request
+			, RedirectAttributes redirectAttributes
+			, ModelMap modelo) {
+		if(loggedIn(request)) {
+			String eliminarId = request.getParameter("eliminaId");
+			
+			menuService.delete(Long.valueOf(eliminarId));
+			
+			return "redirect:/menus/";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
