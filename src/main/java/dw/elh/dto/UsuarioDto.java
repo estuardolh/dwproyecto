@@ -1,6 +1,7 @@
 package dw.elh.dto;
 
 public class UsuarioDto {
+	private String id;
 	private String usuario;
 	private String clave;
 	private String nombre;
@@ -14,6 +15,12 @@ public class UsuarioDto {
 		this.nombre = nombre;
 		this.perfilId = perfilId;
 		this.intentos = intentos;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getUsuario() {
 		return usuario;

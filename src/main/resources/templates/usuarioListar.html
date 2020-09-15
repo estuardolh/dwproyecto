@@ -12,10 +12,17 @@
       <tr>
         <th>Usuario</th>
         <th>Nombre</th>
+        <th>Acción</th>
       </tr>
       <tr th:each="usuario : ${usuarios}">
         <td th:text="${usuario.usuario}"></td>
         <td th:text="${usuario.nombre}"></td>
+        <td>
+        	<form method="post" action="/usuarios/eliminar">
+        		<input type="hidden" id="eliminaId" name="eliminaId" th:value="${usuario.id}">
+        		<input type="submit" value="Eliminar">
+        	</form>
+        </td>
       </tr>
     </table>
     </div>

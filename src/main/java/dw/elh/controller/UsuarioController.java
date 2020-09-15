@@ -70,6 +70,22 @@ public class UsuarioController extends BaseController {
 			return "redirect:/";
 		}
 	}
+
+	@RequestMapping(value="/eliminar",method = {RequestMethod.POST})
+	public String elimina(@RequestHeader HttpHeaders httpHeaders
+			, HttpServletRequest request
+			, RedirectAttributes redirectAttributes
+			, ModelMap modelo) {
+		if(loggedIn(request)) {
+			String eliminarId = request.getParameter("eliminaId");
+			
+			usuarioServicio.delete(Long.valueOf(eliminarId));
+			
+			return "redirect:/usuarios/";
+		}else {
+			return "redirect:/";
+		}
+	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
 	public String login(@ModelAttribute("userDto") UsuarioDto usuario

@@ -10,4 +10,5 @@ public interface UsuarioService {
 	Optional<Usuario> getUsuario(String nombreUsuario);
 	void saveUsuario(Usuario usuario);
 	List<Usuario> getUsuarios();
+	void delete(Long id);
 }
