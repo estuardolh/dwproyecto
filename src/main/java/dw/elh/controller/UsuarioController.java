@@ -2,7 +2,6 @@ package dw.elh.controller;
 
 import java.util.Optional;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,16 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dw.elh.dto.UsuarioDto;
 import dw.elh.model.Usuario;
-import dw.elh.service.MenuService;
 import dw.elh.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="/usuarios")
-public class UsuarioController {
+public class UsuarioController extends BaseController {
 	@Autowired
 	UsuarioService usuarioServicio;
-	@Autowired
-	MenuService menuService;
 
 	@RequestMapping(value="/agregar",method = {RequestMethod.GET, RequestMethod.POST})
 	public String registra(@ModelAttribute("userDto") UsuarioDto usuarioDto
@@ -38,7 +34,7 @@ public class UsuarioController {
 			, RedirectAttributes redirectAttributes
 			, ModelMap modelo) {
 		if(loggedIn(request)) {
-			prepareModel(modelo);
+			preparaModel(modelo);
 			
 			if(request.getMethod().equals(HttpMethod.POST.toString())) {
 				String usuario = usuarioDto.getUsuario();
@@ -66,7 +62,7 @@ public class UsuarioController {
 			, RedirectAttributes redirectAttributes) {
 		
 		if(loggedIn(request)) {
-			prepareModel(modelo);
+			preparaModel(modelo);
 			modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
 			return "usuarioListar";
 		}else {
@@ -91,14 +87,5 @@ public class UsuarioController {
 		}
 		
 		return "redirect:/";
-	}
-
-	private boolean loggedIn(HttpServletRequest request) {
-		HttpSession sesion = request.getSession(false);
-		return !ObjectUtils.isEmpty(sesion.getAttribute("login"))
-		&& sesion.getAttribute("login").equals("true");
-	}
-	private void prepareModel(ModelMap modelo) {
-		modelo.addAttribute("menus", menuService.getMenu());
 	}
 }

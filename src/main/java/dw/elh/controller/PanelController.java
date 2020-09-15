@@ -12,16 +12,13 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dw.elh.service.MenuService;
 import dw.elh.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="/panel")
-public class PanelController {
+public class PanelController extends BaseController {
 	@Autowired
 	UsuarioService usuarioServicio;
-	@Autowired
-	MenuService menuService;
 
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String panel(ModelMap modelo

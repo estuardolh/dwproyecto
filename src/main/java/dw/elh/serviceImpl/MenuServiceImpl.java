@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import dw.elh.dto.MenuDto;
 import dw.elh.model.Menu;
@@ -19,12 +20,13 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<MenuDto> getMenu() {
 		List<MenuDto> listaMenusDto = new ArrayList<>();
-		List<Menu> listaMenus = menuRepository.getMenuByMenuPadreIsNullOrderByPosicion();
+		List<Menu> listaMenus = getMenusPadre();
 	
 		for(int i = 0; i < listaMenus.size() ; i++ ) {
 			Menu menu = listaMenus.get(i);
 			
 			MenuDto menuDto = new MenuDto();
+			menuDto.setId(String.valueOf(menu.getId()));
 			menuDto.setNombre(menu.getNombre());
 			menuDto.setEnlace(menu.getArchivoHtml());
 			
@@ -35,9 +37,12 @@ public class MenuServiceImpl implements MenuService {
 				Menu subMenu = listaSubMenu.get(j);
 				
 				MenuDto subMenuDto = new MenuDto();
+				subMenuDto.setId(String.valueOf(subMenu.getId()));
 				subMenuDto.setNombre(subMenu.getNombre());
 				subMenuDto.setEnlace(subMenu.getArchivoHtml());
 				subMenuDto.setSubMenus(null);
+				subMenuDto.setPadreId(menuDto.getId());
+				subMenuDto.setPadreNombre(menuDto.getNombre());
 				
 				subMenus.add(subMenuDto);
 			}
@@ -48,5 +53,34 @@ public class MenuServiceImpl implements MenuService {
 	
 		return listaMenusDto;
 	}
+
+	@Override
+	public void save(Menu menu) {
+		menuRepository.save(menu);
+	}
+
+	@Override
+	public List<Menu> getMenusPadre() {
+		return menuRepository.getMenuByMenuPadreIsNullOrderByPosicion();
+	}
+
+	@Override
+	public List<MenuDto> getMenusListOrderedByPadre() {
+		List<Menu> menusOrdenados = menuRepository.getMenusListOrderedBy();
 	
+		List<MenuDto> listaMenusDto = new ArrayList<>();
+	
+		for(int i = 0; i < menusOrdenados.size() ; i++ ) {
+			Menu menu = menusOrdenados.get(i);
+			
+			MenuDto menuDto = new MenuDto();
+			menuDto.setId(String.valueOf(menu.getId()));
+			menuDto.setNombre(menu.getNombre());
+			menuDto.setEnlace(menu.getArchivoHtml());
+			menuDto.setPadreNombre(ObjectUtils.isEmpty(menu.getMenuPadre())?"":menu.getMenuPadre().getNombre());
+			
+			listaMenusDto.add(menuDto);
+		}
+		return listaMenusDto; 
+	}
 }

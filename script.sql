@@ -70,6 +70,10 @@ insert into menu values(3,1,'Listar',1,'/usuarios/');
 insert into menu values(4,1,'Estilo',null,null);
 insert into menu values(5,0,'Agregar',4,'/estilos/agregar');
 insert into menu values(6,1,'Listar',4,'/estilos/');
+insert into menu values(7,2,'Menu',null,null);
+insert into menu values(8,0,'Agregar',7,'/menus/agregar');
+insert into menu values(9,1,'Listar',7,'/menus/');
+
 insert into perfil values(1,'Admin',1);
 insert into usuario values(1, 'root', 'root', 'root', 1,0);
 

@@ -7,4 +7,7 @@ import dw.elh.model.Menu;
 
 public interface MenuService {
 	List<MenuDto> getMenu();
+	void save(Menu menu);
+	List<Menu> getMenusPadre();
+	List<MenuDto> getMenusListOrderedByPadre();
 }

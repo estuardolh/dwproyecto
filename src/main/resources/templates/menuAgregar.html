@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Menus')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Menus')">
+	</div>
+	<div style="width:25%">
+		<h2>Agrega menu</h2>
+		<form action="/menus/agregar" method="POST">
+			<label for="nombre">Nombre:</label><br>
+			<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre de menu"><br>
+			<label for="nombre">Enlace:</label><br>
+			<input type="text" id="enlace" name="enlace" value="" placeholder="URL"><br>
+			<label for="nombre">Menu padre:</label><br>
+			<select id="padreId" name="padreId">
+				<option th:each="padre : ${padres}" th:value="${padre.id}" th:text="${padre.nombre}"></option>
+			</select><br><br>
+			<input type="submit" value="Agregar" >
+		</form>
+	</div>
+</body>
+</html>

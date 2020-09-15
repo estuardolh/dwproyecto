@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Menus')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Menus')">
+	</div>
+	
+	<div style="width:80%">
+	<h2>Lista de Menus</h2>
+	<table style="width:60%">
+      <tr>
+        <th>Padre</th>
+        <th>Nombre</th>
+        <th>Enlace</th>
+      </tr>
+      <tr th:each="menu : ${menuExtendido}">
+        <td th:text="${menu.padreNombre}"></td>
+        <td th:text="${menu.nombre}"></td>
+        <td th:text="${menu.enlace}"></td>
+      </tr>
+    </table>
+    </div>
+</body>
+</html>
