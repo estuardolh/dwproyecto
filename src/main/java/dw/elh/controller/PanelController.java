@@ -31,22 +31,10 @@ public class PanelController {
 		if(!ObjectUtils.isEmpty(sesion.getAttribute("login"))
 				&& sesion.getAttribute("login").equals("true")) {
 			
-			/*MenuDto menuUsuarioAgregar = new MenuDto();
-			menuUsuarioAgregar.setNombre("Agregar");
-			menuUsuarioAgregar.setEnlace("/usuarios/agregar");
-			
-			MenuDto menuUsuarioListar = new MenuDto();
-			menuUsuarioListar.setNombre("Ver");
-			menuUsuarioListar.setEnlace("/usuarios");
-			
-			MenuDto menuUsuario = new MenuDto();
-			menuUsuario.setNombre("Usuario");
-			menuUsuario.setSubMenus(Arrays.asList(menuUsuarioAgregar, menuUsuarioListar));*/
-			
 			modelo.addAttribute("menus", menuService.getMenu());
 			return "panel";
 		}
 		else
-			return "redirect:inicio";
+			return "redirect:/";
 	}
 }

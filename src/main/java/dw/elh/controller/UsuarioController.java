@@ -2,6 +2,7 @@ package dw.elh.controller;
 
 import java.util.Optional;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dw.elh.dto.UsuarioDto;
 import dw.elh.model.Usuario;
+import dw.elh.service.MenuService;
 import dw.elh.service.UsuarioService;
 
 @Controller
@@ -26,23 +28,32 @@ import dw.elh.service.UsuarioService;
 public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioServicio;
+	@Autowired
+	MenuService menuService;
 
 	@RequestMapping(value="/agregar",method = {RequestMethod.GET, RequestMethod.POST})
 	public String registra(@ModelAttribute("userDto") UsuarioDto usuarioDto
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
-			, RedirectAttributes redirectAttributes) {
-		if(request.getMethod().equals(HttpMethod.POST.toString())) {
-			String usuario = usuarioDto.getUsuario();
-			String clave = usuarioDto.getClave();
-			String nombre = usuarioDto.getNombre();
-			Usuario newUsuario = new Usuario();
-			newUsuario.setUsuario(usuario);
-			newUsuario.setClave(clave);
-			newUsuario.setNombre(nombre);
-			usuarioServicio.saveUsuario(newUsuario);
+			, RedirectAttributes redirectAttributes
+			, ModelMap modelo) {
+		if(loggedIn(request)) {
+			prepareModel(modelo);
 			
-			return "redirect:/usuarios/";
+			if(request.getMethod().equals(HttpMethod.POST.toString())) {
+				String usuario = usuarioDto.getUsuario();
+				String clave = usuarioDto.getClave();
+				String nombre = usuarioDto.getNombre();
+				Usuario newUsuario = new Usuario();
+				newUsuario.setUsuario(usuario);
+				newUsuario.setClave(clave);
+				newUsuario.setNombre(nombre);
+				usuarioServicio.saveUsuario(newUsuario);
+				
+				return "redirect:/usuarios/";
+			}
+		}else {
+			return "redirect:/";
 		}
 		
 		return "usuarioAgregar";
@@ -53,8 +64,14 @@ public class UsuarioController {
 			, @RequestHeader HttpHeaders httpHeaders
 			, HttpServletRequest request
 			, RedirectAttributes redirectAttributes) {
-		modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
-		return "usuarioListar";
+		
+		if(loggedIn(request)) {
+			prepareModel(modelo);
+			modelo.addAttribute("usuarios", usuarioServicio.getUsuarios());
+			return "usuarioListar";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
@@ -76,4 +93,12 @@ public class UsuarioController {
 		return "redirect:/";
 	}
 
+	private boolean loggedIn(HttpServletRequest request) {
+		HttpSession sesion = request.getSession(false);
+		return !ObjectUtils.isEmpty(sesion.getAttribute("login"))
+		&& sesion.getAttribute("login").equals("true");
+	}
+	private void prepareModel(ModelMap modelo) {
+		modelo.addAttribute("menus", menuService.getMenu());
+	}
 }
