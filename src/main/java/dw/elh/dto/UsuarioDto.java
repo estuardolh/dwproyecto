@@ -7,6 +7,9 @@ public class UsuarioDto {
 	private String nombre;
 	private String perfilId;
 	private String intentos;
+	private String colorBarra;
+	private String colorFondo;
+	private String colorLetra;
 	
 	public UsuarioDto(String usuario, String clave, String nombre, String perfilId, String intentos) {
 		super();
@@ -51,5 +54,23 @@ public class UsuarioDto {
 	}
 	public void setIntentos(String intentos) {
 		this.intentos = intentos;
+	}
+	public String getColorBarra() {
+		return colorBarra;
+	}
+	public void setColorBarra(String colorBarra) {
+		this.colorBarra = colorBarra;
+	}
+	public String getColorFondo() {
+		return colorFondo;
+	}
+	public void setColorFondo(String colorFondo) {
+		this.colorFondo = colorFondo;
+	}
+	public String getColorLetra() {
+		return colorLetra;
+	}
+	public void setColorLetra(String colorLetra) {
+		this.colorLetra = colorLetra;
 	}
 }

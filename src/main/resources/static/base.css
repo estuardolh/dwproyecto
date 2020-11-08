@@ -5,7 +5,7 @@
 	
 	body {
 	  min-height: 100%;
-	  align: center;
+	  align-content: center;
 	}
 	form.login {
 		position: absolute;
@@ -27,7 +27,7 @@
 	
 	body {
 	  min-height: 100%;
-	  align: center;
+	  align-content: center;
 	}
 	form.login {
 		position: absolute;
@@ -40,8 +40,13 @@
 		width:35%;
 		border: 1px solid blue;
 		border-radius: 25px;
+		background-color: white;
+		opacity: 0.92;
 	}
 	input {
 		width:90%
+	}
+	input.boton {
+		width:100%
 	}
 }

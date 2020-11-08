@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Perfiles')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Perfiles')">
+	</div>
+	<div style="width:25%">
+		<h2>Agrega perfil</h2>
+		<form action="/perfiles/agregar" method="POST">
+			<label for="nombre">Nombre:</label><br>
+			<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre de perfil"><br>
+			<input type="submit" value="Agregar" >
+		</form>
+	</div>
+</body>
+</html>

@@ -14,9 +14,36 @@
 			<input type="text" id="usuario" name="usuario" value="" placeholder="Usuario">
 			<br><label for="clave">Contraseña: </label><br>
 			<input type="password" id="clave" name="clave" value="" placeholder="clave">
+			<label for="nombre">Perfil: </label><br>
+			<select id="perfilId" name="perfilId">
+				<option th:each="perfil : ${perfiles}" th:value="${perfil.id}" th:text="${perfil.nombre}"></option>
+			</select><br><br>
+			<br><label for="colorBarra">Color barra: </label><br>
+			<input class="colorBarra" type="input" id="colorBarra" name="colorBarra" value="" placeholder="Color barra">
+			<br><label for="colorFondo">Color fondo: </label><br>
+			<input class="colorFondo" type="input" id="colorFondo" name="colorFondo" value="" placeholder="Color fondo">
+			<br><label for="colorLetra">Color letra: </label><br>
+			<input class="colorLetra" type="input" id="colorLetra" name="colorLetra" value="" placeholder="Color letra">
 			<br>
 			<br>
 			<input type="submit" value="Agregar" >
+			<script type="text/javascript">
+			$(function(){
+				$('.colorBarra').simpleColor({
+					displayColorCode: true
+				});
+			});
+			$(function(){
+				$('.colorFondo').simpleColor({
+					displayColorCode: true
+				});
+			});
+			$(function(){
+				$('.colorLetra').simpleColor({
+					displayColorCode: true
+				});
+			});
+			</script>
 		</form>
 	</div>
 </body>

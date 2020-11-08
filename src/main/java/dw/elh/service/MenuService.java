@@ -11,4 +11,5 @@ public interface MenuService {
 	List<Menu> getMenusPadre();
 	List<MenuDto> getMenusListOrderedByPadre();
 	void delete(Long id);
+	Menu getMenuById(Long id);
 }

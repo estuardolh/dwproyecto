@@ -2,6 +2,7 @@ package dw.elh.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,5 +88,12 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void delete(Long id) {
 		menuRepository.deleteById(id);
-	}	
+	}
+
+	@Override
+	public Menu getMenuById(Long id) {
+		Optional<Menu> optionalMenu = menuRepository.findById(id);
+		return optionalMenu.isPresent() ? optionalMenu.get() : null;
+	}
 }
+ 

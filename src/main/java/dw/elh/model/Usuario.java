@@ -19,6 +19,12 @@ public class Usuario {
 	@JoinColumn(name="perfil_id")
 	private Perfil perfil;
 	private Long intentos;
+	@ManyToOne
+	@JoinColumn(name="menu_id")
+	private Menu menu;
+	private String colorBarra;
+	private String colorFondo;
+	private String colorLetra;
 	
 	public Long getId() {
 		return id;
@@ -55,5 +61,29 @@ public class Usuario {
 	}
 	public void setIntentos(Long intentos) {
 		this.intentos = intentos;
+	}
+	public Menu getMenu() {
+		return menu;
+	}
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+	public String getColorBarra() {
+		return colorBarra;
+	}
+	public void setColorBarra(String colorBarra) {
+		this.colorBarra = colorBarra;
+	}
+	public String getColorFondo() {
+		return colorFondo;
+	}
+	public void setColorFondo(String colorFondo) {
+		this.colorFondo = colorFondo;
+	}
+	public String getColorLetra() {
+		return colorLetra;
+	}
+	public void setColorLetra(String colorLetra) {
+		this.colorLetra = colorLetra;
 	}
 }

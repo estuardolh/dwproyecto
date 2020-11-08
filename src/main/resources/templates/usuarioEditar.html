@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Usuarios')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Usuarios')">
+	</div>
+	<div style="width:25%">
+		<h2>Editar usuario</h2>
+		<form action="/usuarios/editar" method="POST">
+			<label for="nombre">Nombre: </label><br>
+			<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" th:value="${session.usuario.nombre}">
+			<br><label for="usuario">Usuario: </label><br>
+			<input readonly type="text" id="usuario" name="usuario" value="" placeholder="Usuario"  th:value="${session.usuario.usuario}">
+			<br><label for="clave">Contraseña: </label><br>
+			<input type="password" id="clave" name="clave" value="" placeholder="clave"  th:value="${session.usuario.clave}">
+			<br><label for="colorBarra">Color barra: </label><br>
+			<input class="colorBarra" type="input" id="colorBarra" name="colorBarra" value="" placeholder="Color barra" th:value="${session.usuario.colorBarra}">
+			<br><label for="colorFondo">Color fondo: </label><br>
+			<input class="colorFondo" type="input" id="colorFondo" name="colorFondo" value="" placeholder="Color fondo" th:value="${session.usuario.colorFondo}">
+			<br><label for="colorLetra">Color letra: </label><br>
+			<input class="colorLetra" type="input" id="colorLetra" name="colorLetra" value="" placeholder="Color letra" th:value="${session.usuario.colorLetra}">
+			<br>
+			<br>
+			<input type="submit" value="Guardar cambios" >
+			<script type="text/javascript">
+			$(function(){
+				$('.colorBarra').simpleColor({
+					displayColorCode: true
+				});
+			});
+			$(function(){
+				$('.colorFondo').simpleColor({
+					displayColorCode: true
+				});
+			});
+			$(function(){
+				$('.colorLetra').simpleColor({
+					displayColorCode: true
+				});
+			});
+			</script>
+		</form>
+	</div>
+</body>
+</html>

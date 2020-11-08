@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Perfiles')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Perfiles ')">
+	</div>
+	
+	<div style="width:80%">
+	<h2>Lista de Perfiles</h2>
+	<table style="width:60%">
+      <tr>
+        <th>Nombre</th>
+        <th>Accion</th>
+      </tr>
+      <tr th:each="perfil : ${perfiles}">
+        <td th:text="${perfil.nombre}"></td>
+        <td>
+        	<form method="post" action="/perfiles/eliminar">
+        		<input type="hidden" id="eliminaId" name="eliminaId" th:value="${perfil.id}">
+        		<input type="submit" value="Eliminar">
+        	</form>
+        </td>
+      </tr>
+    </table>
+    </div>
+</body>
+</html>

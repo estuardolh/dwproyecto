@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Herramientas')">
+</head>
+<body>
+	<div th:replace="comun :: menu (titulo = '/ Herramientas ')">
+	</div>
+	
+	<div style="width:80%">
+	<h2>Lista de Herramientas</h2>
+	<table style="width:60%" border = 1>
+      <tr>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Unidades</th>
+        <th>Costo</th>
+        <th>Fecha ingreso</th>
+      </tr>
+      <tr th:each="herramienta : ${herramientas}">
+        <td th:text="${herramienta.codigo}"></td>
+        <td th:text="${herramienta.nombre}"></td>
+        <td th:text="${herramienta.descripcion}"></td>
+        <td th:text="${herramienta.unidades}"></td>
+        <td th:text="${herramienta.costo}"></td>
+        <td th:text="${herramienta.fechaIngreso}"></td>
+      </tr>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun :: cabecera (titulo='Herramientas')">
+</head>
+<body ng-app = "myApp">
+	<div th:replace="comun :: menu (titulo = '/ Herramienta')">
+	</div>
+	<div style="width:25%">
+		<h2>Importar herramienta</h2><br/>
+		<h5>Seleccione un archivo Excel:</h5>
+		<div ng-controller = "myCtrl">
+			<input type = "file" file-model = "myFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /><br/><br/>
+	    	<button style="display: inline-block;" ng-click = "uploadFile()">Cargar archivo</button>
+		</div>
+	</div>
+	<script>
+         var myApp = angular.module('myApp', []);
+         
+         myApp.directive('fileModel', ['$parse', function ($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function() {
+                     scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         }]);
+         myApp.service('fileUpload', ['$http', function ($http) {
+            this.uploadFileToUrl = function(file, uploadUrl) {
+               var fd = new FormData();
+               fd.append('file', file);
+            
+               $http.post(uploadUrl, fd, {
+                  transformRequest: angular.identity,
+                  headers: {'Content-Type': undefined}
+               })
+               .success(function() {
+            	   alert('Carga exitosa');
+            	   window.location.href = 'http://68.183.30.163:8080/panel/';
+               })
+               .error(function() {
+            	   alert('Carga fallida.');
+               });
+            }
+         }]);
+         myApp.controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload) {
+            $scope.uploadFile = function() {
+               
+               var file = $scope.myFile;
+               console.log('file is ' );
+               console.dir(file);
+               var uploadUrl = "http://68.183.30.163:8081/importador/herramientas/excel";
+               fileUpload.uploadFileToUrl(file, uploadUrl);
+            };
+         }]);
+      </script>
+</body>
+</html>
